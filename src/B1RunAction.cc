@@ -14,26 +14,26 @@
 #include "G4SystemOfUnits.hh"
 
 
-B1RunAction::B1RunAction() : G4UserRunAction() 
-{ 
+B1RunAction::B1RunAction() : G4UserRunAction()
+{
   G4RootAnalysisManager* analysisManager = G4AnalysisManager::Instance();
   G4cout << "Using " << analysisManager->GetType() << G4endl;
   analysisManager->SetVerboseLevel(1);
   analysisManager->SetNtupleMerging(true);
-  
+
   //---- Creating histograms ----//
   analysisManager->SetFirstHistoId(1);
-  
+
   // Energy depostion in detector (all particles)
   analysisManager->CreateH1("Edep","total E deposition", 500, 0., 50);
   analysisManager->SetH1XAxisTitle(1, "energy deposit per cm (keV)");
   analysisManager->SetH1YAxisTitle(1, "nof entries");
-  
-  // Energy loss of the incident particle 
+
+  // Energy loss of the incident particle
   analysisManager->CreateH1("Eloss","E loss", 500, 0., 50);
   analysisManager->SetH1XAxisTitle(2, "energy loss per cm (keV)");
   analysisManager->SetH1YAxisTitle(2, "nof entries");
-  
+
   // Step lengths of simulation steps (i.e. distance between collisions)
   analysisManager->CreateH1("StepL","Step Lengths", 100, 0., 40*CLHEP::cm);
   analysisManager->SetH1XAxisTitle(3, "step length (mm)");
@@ -43,15 +43,15 @@ B1RunAction::B1RunAction() : G4UserRunAction()
 
 B1RunAction::~B1RunAction()
 {
-    delete G4AnalysisManager::Instance();  
+    delete G4AnalysisManager::Instance();
 }
 
 
 void B1RunAction::BeginOfRunAction(const G4Run*)
-{ 
+{
   // inform the runManager to save random number seed
   G4RunManager::GetRunManager()->SetRandomNumberStore(false);
-  
+
   // copy from B4
   G4RootAnalysisManager* analysisManager = G4AnalysisManager::Instance();
   G4String fileName = "Edep";
@@ -66,8 +66,10 @@ void B1RunAction::EndOfRunAction(const G4Run* run)
 
   G4RootAnalysisManager* analysisManager = G4AnalysisManager::Instance();
   analysisManager->Write();
+  // Prints whatever is in analysismanager
+  //std::cout << analysisManager;
   analysisManager->CloseFile();
-        
+
   G4cout
      << G4endl
      << " The run consists of " << nofEvents << " events."
@@ -76,4 +78,3 @@ void B1RunAction::EndOfRunAction(const G4Run* run)
      << G4endl
      << G4endl;
 }
-

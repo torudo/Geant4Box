@@ -7,3 +7,9 @@ fun1 = TF1( 'fun1', 'abs(sin(x)/x)', 0, 10 )
 c1.SetGrid()
 fun1.Draw()
 raw_input()
+
+
+# import ROOT
+# f = ROOT.TFile.Open("blah.root")
+# for event in f.treename :
+#       print event.branchName.<do something with it>
