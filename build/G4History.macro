@@ -60,11 +60,3 @@
 /vis/viewer/flush
 /vis/viewer/refresh viewer-0
 /vis/viewer/update viewer-0
-/gun/particle p-
-/gun/particle p
-/gun/particle pr
-/gun/particle e
-/gun/particle e-
-/gun/energy 200 MeV
-/run/beamOn 1000
-/vis/scene/notifyHandlers scene-0

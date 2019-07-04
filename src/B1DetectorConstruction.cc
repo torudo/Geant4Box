@@ -21,27 +21,27 @@ B1DetectorConstruction::~B1DetectorConstruction()
 
 
 G4VPhysicalVolume* B1DetectorConstruction::Construct()
-{  
+{
   // Get nist material manager
   G4NistManager* nist = G4NistManager::Instance();
-  
+
   // Option to switch on/off checking of volumes overlaps
   G4bool checkOverlaps = true;
-  
+
   // test material
   G4double box_sizeXY = 2*m, box_sizeZ = 1*cm; // box sizes
-//   G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Neon", "G4_Ne", CLHEP::STP_Temperature, CLHEP::STP_Pressure);
+  //G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Neon", "G4_Ne", CLHEP::STP_Temperature, CLHEP::STP_Pressure);
   G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Argon", "G4_Ar", CLHEP::STP_Temperature, CLHEP::STP_Pressure);
   G4Material* env_mat = nist->FindOrBuildMaterial("G4_Galactic");
-  
-  
+
+
   //---- The global object (with vacuum) ----//
-  
-  G4Box* environment_solid 
+
+  G4Box* environment_solid
     = new G4Box("environment", 3.*box_sizeXY, 3.*box_sizeXY, 100.*box_sizeZ);
-  G4LogicalVolume* environment_logic 
+  G4LogicalVolume* environment_logic
     = new G4LogicalVolume(environment_solid, env_mat, "environment");
-  G4VPhysicalVolume* environment 
+  G4VPhysicalVolume* environment
     = new G4PVPlacement(
       0,                          // rotation
       G4ThreeVector(0.,0.,0.),    // inital position
@@ -50,12 +50,12 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
       0,                          // no mother value
       false,                      // no bool operation
       0,                          // copy number
-      checkOverlaps               // integrity check 
+      checkOverlaps               // integrity check
     );
-  
-    
-  //---- Test volume where E deposition is measured ----//  
-  
+
+
+  //---- Test volume where E deposition is measured ----//
+
   // solid: physical size
   G4Box* material_box_solid
     = new G4Box("material_box", 0.5*box_sizeXY, 0.5*box_sizeXY, 0.5*box_sizeZ); // 1/2 because Geant takes values as halflengths
@@ -73,9 +73,9 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
     0,
     checkOverlaps
   );
-  
+
   fScoringVolume = material_box_logic;
-  
+
   //
   //always return the physical World
   //
