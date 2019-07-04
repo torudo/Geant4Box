@@ -16,9 +16,11 @@ x=[]
 for k in xrange(0,100):
     x.append(hist.GetBinContent(k))
 
-print(x)
+#print(x)
 f.Close()
 exit()
+#Bis hier liest es die Daten ein!
+
 #bins = hist.GetArray()
 #x=[]
 #print(bins)
@@ -36,7 +38,7 @@ lxg = ROOT.RooFFTConvPdf("lxg","lxg",x,landau,gauss);
 
 #TestData
 data = lxg.generate(ROOT.RooArgSet(x),10000)
-
+print(data)
 result = gauss.fitTo(data,ROOT.RooFit.PrintLevel(-1))
 resultL = landau.fitTo(data,ROOT.RooFit.PrintLevel(-1))
 result_lxg = lxg.fitTo(data,ROOT.RooFit.PrintLevel(-1))

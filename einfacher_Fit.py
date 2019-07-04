@@ -17,6 +17,10 @@ fitfunc.SetParameter(0,5)
 hist.Fit("fitfunc")
 hist.Draw()
 
+fitfunc2 = TF1("fitfunc2", "gaus(0)",0,1000)
+hist.Fit("fitfunc2")
+fitfunc2.Draw("SAME")
+
 gStyle.SetOptFit()
 
 
