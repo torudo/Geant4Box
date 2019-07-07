@@ -31,7 +31,10 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   // test material
   G4double box_sizeXY = 2*m, box_sizeZ = 1*cm; // box sizes
   //G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Neon", "G4_Ne", CLHEP::STP_Temperature, CLHEP::STP_Pressure);
-  G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Argon", "G4_Ar", CLHEP::STP_Temperature, CLHEP::STP_Pressure);
+  //G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Neon", "G4_Ne", CLHEP::STP_Temperature, CLHEP::STP_Pressure);
+  G4Material* box_mat = nist->ConstructNewGasMaterial("STD_N", "G4_N", CLHEP::STP_Temperature, CLHEP::STP_Pressure);// 3.e-18*pascal);
+  //G4Material* box_mat = nist->FindOrBuildMaterial("G4_Ur","Uran", "92", 1)
+  //G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Uran", "G4_U", 300.0, 1.0);
   G4Material* env_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
 

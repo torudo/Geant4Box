@@ -30,11 +30,11 @@ gStyle.SetOptStat(1111)
 
 # fit the histogram
 fit = LanGausFit()
-func = fit.fit(hist)
+#func = fit.fit(hist)
 
 # The fitter return a ROOT TF1 (a 1D function).
 #func.Print()
-func.Draw("SAME")
+#func.Draw("SAME")
 
 c1.Update()
 c1.Print(path+"Eloss_"+dateiname+".pdf")
@@ -60,14 +60,14 @@ gStyle.SetOptStat(1111)
 
 # fit the histogram
 fit = LanGausFit()
-func = fit.fit(hist)
-func.SetLineColor(4)
-param = func.GetParameters()#gets the Fit parameter
-print(param[1]) #prints out the MPV
+#func = fit.fit(hist)
+#func.SetLineColor(4)
+#param = func.GetParameters()#gets the Fit parameter
+#print(param[1]) #prints out the MPV
 
 # The fitter return a ROOT TF1 (a 1D function).
 #func.Print()
-func.Draw("SAME") # bei mehreren Plots muss SAME angegeben werden
+#func.Draw("SAME") # bei mehreren Plots muss SAME angegeben werden
 c2.Update()
 c2.Print(path+"Edep_"+dateiname+".pdf")
 
