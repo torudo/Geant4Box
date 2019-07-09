@@ -47,8 +47,8 @@ int main(int argc,char** argv)
   //---- Physics list ----//
 
 // ref.: https://geant4-userdoc.web.cern.ch/geant4-userdoc/UsersGuides/PhysicsListGuide/html/reference_PL/QGSP_BERT.html#recommended-use-cases
- // G4VModularPhysicsList* physicsList = new FTFP_BERT;
-  G4VModularPhysicsList* physicsList = new QBBC;
+  G4VModularPhysicsList* physicsList = new FTFP_BERT;
+  //G4VModularPhysicsList* physicsList = new QBBC;
   //G4VModularPhysicsList* physicsList = new QGSP_BERT;
 
   // range cut on electrons (suppress delta electrons by using a large value)
