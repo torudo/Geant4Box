@@ -4,7 +4,7 @@ import sys
 dateiname = sys.argv[1]
 
 f = ROOT.TFile(dateiname)
-hist = f.Edep
+hist = f.Eloss
 #hist.SetAxisRange(0., 50.,"X")
 #hist.SetAxisRange(0., 1000.,"Y")
 #hist.SetAxisRange(0., 100.,"X")
