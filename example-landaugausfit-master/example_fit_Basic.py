@@ -5,7 +5,7 @@ from langaus import LanGausFit
 #histogram.FillRandom("gaus", 1000)
 
 #reed a histogram
-myfile = TFile('build/Edep.root')
+myfile = TFile('../build/Edep.root')
 hist = myfile.Eloss
 
 # fit the histogram

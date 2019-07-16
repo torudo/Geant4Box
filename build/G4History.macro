@@ -60,4 +60,7 @@
 /vis/viewer/flush
 /vis/viewer/refresh viewer-0
 /vis/viewer/update viewer-0
-/material/g4/printMaterial
+/gun/particle mu-
+/gun/energy 10 MeV
+/run/beamOn 1000
+/vis/scene/notifyHandlers scene-0

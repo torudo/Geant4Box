@@ -7,7 +7,7 @@ from langaus import LanGausFit
 import sys
 import os
 
-schreibeInDatei(datei_name, energie, MPV, STDV):
+def schreibeInDatei(datei_name, energie, MPV, STDV):
     #Wenn die Datei nicht existiert soll die erste Zeile geruckt werden, sonst nicht
     try:
         with open(datei_name) as f_obj:
@@ -20,39 +20,41 @@ schreibeInDatei(datei_name, energie, MPV, STDV):
             f_obj.write(energie +"\t" +MPV +STDV +"\n")
 
 #newpath = r'Test'
-path = sys.argv[1]
+path = sys.argv[1] #Ordner
+dirs = os.listdir( path )
 
-for dateien in dir:
-    #macht aus DAteinamen Energie
-    name_zerlegt = dateien.split("_")
-    energie = name_zerlegt[2]
+for dateien in dirs:
+    if dateien[-5:]==".root":
+        print(dateien)
+        #macht aus DAteinamen Energie
+        name_zerlegt = dateien.split("_")
+        energie = name_zerlegt[6]
+        print(energie)
+        #reed a histogram
+        myfile = ROOT.TFile(path+"/"+dateien)
+        print("Eloss")
+        c1 = ROOT.TCanvas('canvas', '', 1200, 800)
+        hist = myfile.Eloss
+        myfile.Close()
+        hist.Draw()
+        gStyle.SetTitleOffset(1.4,"y")
+        gStyle.SetOptFit(111)
+        gStyle.SetOptStat(1111)
+        #hist.GetXaxis().SetRange(0,100);
 
-    #reed a histogram
-    myfile = ROOT.TFile(dateien)
-    print("Eloss")
-    c1 = ROOT.TCanvas('canvas', '', 1200, 800)
-    hist = myfile.Eloss
-    myfile.Close()
-    hist.Draw()
-    gStyle.SetTitleOffset(1.4,"y")
-    gStyle.SetOptFit(111)
-    gStyle.SetOptStat(1111)
-    #hist.GetXaxis().SetRange(0,100);
-
-    # fit the histogram
-    fit = LanGausFit()
-    func = fit.fit(hist)
-    param = func.GetParameters()#gets the Fit parameter
-    #print(param[1]) #prints out the MPV
-    MPV = param[1]
-    STDV = param[2]
-
-    schreibeindate(dateien, enerige, MPV, STDV) #Fügt Fitwerte in Datei ein
-    # The fitter return a ROOT TF1 (a 1D function).
-    #func.Print()
-    func.Draw("SAME")
-    c1.Update()
-    c1.Print("Eloss_"+dateien+".pdf")
+        # fit the histogram
+        fit = LanGausFit()
+        func = fit.fit(hist)
+        param = func.GetParameters()#gets the Fit parameter
+        #print(param[1]) #prints out the MPV
+        MPV = param[1]
+        STDV = param[2]
+        # The fitter return a ROOT TF1 (a 1D function).
+        #func.Print()
+        #schreibeInDatei(datei_name, energie, MPV, STDV)
+        func.Draw("SAME")
+        c1.Update()
+        c1.Print(path+"/"+"Eloss_"+dateien+".pdf")
 
 ################################################################################
 #Edep
