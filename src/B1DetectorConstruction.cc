@@ -29,7 +29,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   G4bool checkOverlaps = true;
 
   // test material
-  G4double box_sizeXY = 2*m, box_sizeZ = 10*cm; // box sizes
+  G4double box_sizeXY = 2*m, box_sizeZ = 1*cm; // box sizes
 //Materials!
 
   G4Element* H  = nist->FindOrBuildElement(1);
@@ -115,11 +115,13 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
 
 // Checking forthe Z
 // liquid argon with z = 18
-  G4double density = 1.390*g/cm3;
-  G4double a = 100*g/mole;
-  G4double z = 30.;
-  G4Material* box_mat = new G4Material("something", z, a,density);
+  //G4double density = 1.390*g/cm3;
+  // G4double a = 100*g/mole;
+  // G4double z = 30.;
+  // G4Material* box_mat = new G4Material("something", z, a,density);
 
+//Temp
+  G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Argon", "G4_Ar", CLHEP::STP_Temperature, 33*bar);
 
   G4Material* env_mat = nist->FindOrBuildMaterial("G4_Galactic");
 

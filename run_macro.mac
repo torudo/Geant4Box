@@ -16,7 +16,7 @@
 #/gun/particle e+
 #/gun/particle gamma
 /gun/particle proton
-/gun/energy 20 GeV
+/gun/energy 200 MeV
 #
 # number of particles simulated
 #/run/beamOn 250000
