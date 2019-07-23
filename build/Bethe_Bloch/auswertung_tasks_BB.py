@@ -18,9 +18,16 @@ from scipy import stats
 
 
 ###################################### Data Setup ############################
-file = "Ar/Ar_BB.txt" # takes first argument as filename
-file2 = "Ar_CO2/Ar_CO2_BB.txt" # takes first argument as filename
-file3 = "Ne/Ne_BB.txt" # takes first argument as filename
+# file = "Ar/Ar_BB.txt" # takes first argument as filename
+# file2 = "Ar_CO2/Ar_CO2_BB.txt" # takes first argument as filename
+# file3 = "Ne/Ne_BB.txt" # takes first argument as filename
+
+#windwos
+file = r'C:\Users\tobys\Documents\GitHub\Geant4Box\build\Bethe_Bloch\Ar\Ar_BB.txt' # takes first argument as filename
+file2 = r'C:\Users\tobys\Documents\GitHub\Geant4Box\build\Bethe_Bloch\Ar_CO2\Ar_CO2_BB.txt' # takes first argument as filename
+file3 = r'C:\Users\tobys\Documents\GitHub\Geant4Box\build\Bethe_Bloch\Ne\Ne_BB.txt' # takes first argument as filename
+
+
 a1 = 12 #breite
 b1 = 6 #höhe
 fig=plt.figure(figsize=(a1,b1))
@@ -66,6 +73,6 @@ plt.xscale('log')
 locs, labels = xticks()
 #plt.xticks((-20050,0,20050), ('-2e4', '0', '2e4'), size = 10 )
 plt.grid()
-#plt.show()
-plt.savefig("BetheBloch.pdf",bbox_inches='tight')
-plt.close()
+plt.show()
+#plt.savefig("BetheBloch.pdf",bbox_inches='tight')
+#plt.close()
