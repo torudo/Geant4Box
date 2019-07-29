@@ -25,12 +25,12 @@ B1RunAction::B1RunAction() : G4UserRunAction()
   analysisManager->SetFirstHistoId(1);
 
   // Energy depostion in detector (all particles)
-  analysisManager->CreateH1("Edep","total E deposition", 500, 0., 50);
+  analysisManager->CreateH1("Edep","total E deposition", 500, 0., 7000);
   analysisManager->SetH1XAxisTitle(1, "energy deposit per cm (keV)");
   analysisManager->SetH1YAxisTitle(1, "nof entries");
 
   // Energy loss of the incident particle
-  analysisManager->CreateH1("Eloss","E loss", 500, 0., 50);
+  analysisManager->CreateH1("Eloss","E loss", 500, 0., 7000);
   analysisManager->SetH1XAxisTitle(2, "energy loss per cm (keV)");
   analysisManager->SetH1YAxisTitle(2, "nof entries");
 
@@ -55,7 +55,7 @@ void B1RunAction::BeginOfRunAction(const G4Run*)
   // copy from B4
   G4RootAnalysisManager* analysisManager = G4AnalysisManager::Instance();
   //G4String fileName = "Edep_Proton_200_MeV_Ar_1_cm_09_P";
-  G4String fileName = "Edep_BB_electron_Ar_1_cm_100000000_MeV";
+  G4String fileName = "Edep_ZN_13_Al_Proton_200_MeV_1_cm";
   analysisManager->OpenFile(fileName);
 }
 
