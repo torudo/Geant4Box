@@ -29,7 +29,8 @@ def linea(x, b0, b1):
 # Plotbereiche
 ###################################### Data Setup ############################
 #file = sys.argv[1] # takes first argument as filename
-file = "/home/rudolph/Geant4Box/build/rightZ/Z_eloss.txt" # takes first argument as filename
+#file = "/home/rudolph/Geant4Box/build/rightZ/Z_eloss.txt" # takes first argument as filename
+file = r"C:\Users\tobys\Documents\GitHub\Geant4Box\build\rightZ\Z_eloss.txt" # takes first argument as filename
 
 a1 = 12 #breite
 b1 = 6 #höhe
@@ -83,6 +84,6 @@ locs, labels = xticks()
 #plt.xticks((-20050,0,20050), ('-2e4', '0', '2e4'), size = 10 )
 #ax.grid(axis="x")
 ax.grid(which='major', axis='both', linestyle='--',alpha=0.5)# lw = 0.5)
-plt.show()
-#plt.savefig("Z.pdf",bbox_inches='tight')
-#plt.close()
+#plt.show()
+plt.savefig("Z.pdf",bbox_inches='tight')
+plt.close()
