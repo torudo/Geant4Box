@@ -36,6 +36,7 @@ a1 = 12 #breite
 b1 = 6 #höhe
 fig=plt.figure(figsize=(a1,b1))
 ax = plt.gca()
+
 energie, MPV, ERR = np.genfromtxt(file,
             usecols=(0,1,2), comments="#",  unpack="True") # opens data ans extract values at lines
 
@@ -51,6 +52,7 @@ fitdata, covlinea = curve_fit(linea, energie, MPV, p0=fitdata, sigma=ERR)
 err_coef = np.sqrt(np.diag(covlinea))
 
 plt.plot(X, linea(X,*fitdata), label='Fit', color='#009E73') # Fit plot
+
 plt.errorbar(energie, MPV, yerr=ERR*100, marker= 'x', markersize=6,
         linewidth=0, elinewidth=1, capsize=2,
         label='Ar', color='red', ecolor='gray') # Messwerte

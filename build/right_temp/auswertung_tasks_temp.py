@@ -21,7 +21,8 @@ matplotlib.rcParams['font.serif'] = 'Palatino'
 matplotlib.rcParams['font.size'] = 16
 
 ###################################### Data Setup ############################
-file = sys.argv[1] # takes first argument as filename
+#file = sys.argv[1] # takes first argument as filename
+file = r"C:\Users\tobys\Documents\GitHub\Geant4Box\build\right_temp\temp_neu.txt" # takes first argument as filename
 
 energie, MPV, ERR = np.genfromtxt(file,
             usecols=(0,1,2), comments="#",  unpack="True") # opens data ans extract values at lines
@@ -42,12 +43,14 @@ plt.errorbar(energie-273.15, MPV, yerr=ERR*10, marker= 'x', markersize=5,
 
 plt.xlabel(r"$T$ / °C",fontsize='16')
 plt.ylabel(r"MPV")
+#plt.xlim(0,1400)
+plt.ylim(0,20)
 #plt.legend(fontsize='8')
 #plt.yscale('log')
 #plt.xscale('log')
 locs, labels = xticks()
 #plt.xticks((-20050,0,20050), ('-2e4', '0', '2e4'), size = 10 )
 plt.grid()
-#plt.show()
-plt.savefig("temp_C.pdf",bbox_inches='tight')
-plt.close()
+plt.show()
+#plt.savefig("temp_from0.pdf",bbox_inches='tight')
+#plt.close()
