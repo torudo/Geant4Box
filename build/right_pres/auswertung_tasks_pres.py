@@ -21,8 +21,8 @@ matplotlib.rcParams['font.serif'] = 'Palatino'
 matplotlib.rcParams['font.size'] = 16
 
 ###################################### Data Setup ############################
-file = sys.argv[1] # takes first argument as filename
-
+#file = sys.argv[1] # takes first argument as filename
+file = r"C:\Users\tobys\Documents\GitHub\Geant4Box\build\right_pres\pres_eloss.txt"
 energie, MPV, ERR = np.genfromtxt(file,
             usecols=(0,1,2), comments="#",  unpack="True") # opens data ans extract values at lines
 
@@ -36,11 +36,12 @@ fig=plt.figure(figsize=(a1,b1))
 ax = plt.gca()
 #0 K = -273,15 C
 
-plt.errorbar(energie-273.15, MPV, yerr=ERR*10, marker= 'x', markersize=5,
+#plt.errorbar(energie-273.15, MPV, yerr=ERR*10, marker= 'x', markersize=5,
+plt.errorbar(energie, MPV, yerr=ERR*10, marker= 'x', markersize=5,
         linewidth=0, elinewidth=1, capsize=2,
         label='Ar', color='red', ecolor='gray') # Messwerte
 
-plt.xlabel(r"$T$ / °C",fontsize='16')
+plt.xlabel(r"$p$ / bar",fontsize='16')
 plt.ylabel(r"MPV")
 #plt.legend(fontsize='8')
 #plt.yscale('log')
@@ -48,6 +49,6 @@ plt.ylabel(r"MPV")
 locs, labels = xticks()
 #plt.xticks((-20050,0,20050), ('-2e4', '0', '2e4'), size = 10 )
 plt.grid()
-#plt.show()
+plt.show()
 plt.savefig("temp_C.pdf",bbox_inches='tight')
 plt.close()
