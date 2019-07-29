@@ -121,7 +121,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   // G4Material* box_mat = new G4Material("something", z, a,density);
 
 //Temp
-  G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Argon", "G4_Ar", CLHEP::STP_Temperature, 33*bar);
+  G4Material* box_mat = nist->ConstructNewGasMaterial("STD_Argon", "G4_Ar", CLHEP::STP_Temperature, 0.9*bar);
 
   G4Material* env_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
