@@ -29,7 +29,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   G4bool checkOverlaps = true;
 
   // test material
-  G4double box_sizeXY = 2*m, box_sizeZ = 1*cm; // box sizes
+  G4double box_sizeXY = 2*m, box_sizeZ = 0.1*cm; // box sizes
 //Materials!
   G4Element* H  = nist->FindOrBuildElement(1);
   G4Element* He  = nist->FindOrBuildElement(2);
@@ -232,8 +232,8 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
  //  box_mat->AddElement(Mg, 1.0);
 //  G4Material* box_mat = new G4Material("Al ", 2.699*g/cm3, 1);
  //  box_mat->AddElement(Al, 1.0);
-  G4Material* box_mat = new G4Material("Si ", 2.33*g/cm3, 1);
-  box_mat->AddElement(Si, 1.0);
+//  G4Material* box_mat = new G4Material("Si ", 2.33*g/cm3, 1);
+//  box_mat->AddElement(Si, 1.0);
 //  G4Material* box_mat = new G4Material("P ", 2.2*g/cm3, 1);
  //  box_mat->AddElement(P, 1.0);
 //  G4Material* box_mat = new G4Material("S ", 2*g/cm3, 1);
@@ -262,8 +262,8 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
  //  box_mat->AddElement(Co, 1.0);
 //  G4Material* box_mat = new G4Material("Ni ", 8.902*g/cm3, 1);
  //  box_mat->AddElement(Ni, 1.0);
-//  G4Material* box_mat = new G4Material("Cu ", 8.96*g/cm3, 1);
- //  box_mat->AddElement(Cu, 1.0);
+  G4Material* box_mat = new G4Material("Cu ", 8.96*g/cm3, 1);
+  box_mat->AddElement(Cu, 1.0);
 //  G4Material* box_mat = new G4Material("Zn ", 7.133*g/cm3, 1);
  //  box_mat->AddElement(Zn, 1.0);
 //  G4Material* box_mat = new G4Material("Ga ", 5.904*g/cm3, 1);

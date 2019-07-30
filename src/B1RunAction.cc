@@ -27,12 +27,12 @@ B1RunAction::B1RunAction() : G4UserRunAction()
 // 10 for gases of liwer density
 // otherwise 700
   // Energy depostion in detector (all particles)
-  analysisManager->CreateH1("Edep","total E deposition", 500, 0., 15000);
+  analysisManager->CreateH1("Edep","total E deposition", 500, 0., 65000);
   analysisManager->SetH1XAxisTitle(1, "energy deposit per cm (keV)");
   analysisManager->SetH1YAxisTitle(1, "nof entries");
 
   // Energy loss of the incident particle
-  analysisManager->CreateH1("Eloss","E loss", 500, 0., 15000);
+  analysisManager->CreateH1("Eloss","E loss", 500, 0., 65000);
   analysisManager->SetH1XAxisTitle(2, "energy loss per cm (keV)");
   analysisManager->SetH1YAxisTitle(2, "nof entries");
 
@@ -56,7 +56,8 @@ void B1RunAction::BeginOfRunAction(const G4Run*)
 
   // copy from B4
   G4RootAnalysisManager* analysisManager = G4AnalysisManager::Instance();
-  //G4String fileName = "Edep_ZN_1_H_Proton_20_GeV_1_cm";
+  G4String fileName = "BBmuon_40000_MeV_Cu_01_cm";
+  //  G4String fileName = "Edep_ZN_1_H_Proton_20_GeV_1_cm";
   // G4String fileName = "Edep_ZN_2_He_Proton_20_GeV_1_cm";
   // G4String fileName = "Edep_ZN_3_Li_Proton_20_GeV_1_cm";
   // G4String fileName = "Edep_ZN_4_Be_Proton_20_GeV_1_cm";
@@ -69,7 +70,7 @@ void B1RunAction::BeginOfRunAction(const G4Run*)
   // G4String fileName = "Edep_ZN_11_Na_Proton_20_GeV_1_cm";
   // G4String fileName = "Edep_ZN_12_Mg_Proton_20_GeV_1_cm";
   // G4String fileName = "Edep_ZN_13_Al_Proton_20_GeV_1_cm";
-   G4String fileName = "Edep_ZN_14_Si_Proton_20_GeV_1_cm";
+  // G4String fileName = "Edep_ZN_14_Si_Proton_20_GeV_1_cm";
   // G4String fileName = "Edep_ZN_15_P_Proton_20_GeV_1_cm";
   // G4String fileName = "Edep_ZN_16_S_Proton_20_GeV_1_cm";
   // G4String fileName = "Edep_ZN_17_Cl_Proton_20_GeV_1_cm";
