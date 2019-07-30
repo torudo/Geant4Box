@@ -16,6 +16,9 @@ import sys
 from scipy.optimize import curve_fit
 from scipy import stats
 
+from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes, mark_inset
+
+
 #Für die Latexschrift
 #matplotlib.rcParams['text.usetex'] = True #macht den plot erheblich langsamer!
 matplotlib.rcParams['font.family'] = 'sans-serif'
@@ -53,7 +56,7 @@ X = np.linspace(0, np.max(energie), len(energie)+1000 , endpoint=True)
 
 plt.plot(X, linea(X,*fitdata), label='Fit', color='#009E73', alpha = 0.5) # Fit plot
 
-plt.errorbar(energie, MPV, yerr=ERR, marker= 'x', markersize=10,
+plt.errorbar(energie, MPV, yerr=ERR*100, marker= 'x', markersize=10,
         linewidth=0, elinewidth=1, capsize=2,
         label='Ar', color='red', ecolor='gray') # Messwerte
 
@@ -69,7 +72,7 @@ ax.text(0.05, 0.95, textstr, transform=ax.transAxes, fontsize=14,
         verticalalignment='top', bbox=props)
 
 
-plt.xlabel("$density$ / mg/cm^3",fontsize='16')
+plt.xlabel(r"$density$ / mg/cm$^3$",fontsize='16')
 plt.ylabel(r"$MPV$",fontsize='16')
 #plt.legend(fontsize='16')
 #plt.yscale('log')
@@ -78,8 +81,41 @@ locs, labels = xticks()
 #plt.xticks((-20050,0,20050), ('-2e4', '0', '2e4'), size = 10 )
 #plt.grid()
 
+ax.yaxis.set_major_locator(MultipleLocator(5000))
+ax.yaxis.set_minor_locator(MultipleLocator(1000))
+
+ax.xaxis.set_major_locator(MultipleLocator(2))
+ax.xaxis.set_minor_locator(MultipleLocator(0.5))
+
 ax.grid(which='major', axis='both', linestyle='--',alpha=0.5)# lw = 0.5)
+ax.tick_params(direction='in', length=6, width=2)
+ax.tick_params(which='minor',direction='in', length=4)
+
+x0, y0, width, height = 530, 75, 0, 0
+axins = zoomed_inset_axes(ax, 7, loc="lower left", bbox_to_anchor=(x0, y0, width, height))
+
+
+axins.plot(X, linea(X,*fitdata), label='Fit', color='#009E73', alpha = 0.5) # Fit plot
+
+axins.errorbar(energie, MPV, yerr=ERR, marker= 'x', markersize=10,
+        linewidth=0, elinewidth=1, capsize=2,
+        label='Ar', color='red', ecolor='gray') # Messwerte
+
+axins.yaxis.set_major_locator(MultipleLocator(1000))
+axins.yaxis.set_minor_locator(MultipleLocator(500))
+
+axins.xaxis.set_major_locator(MultipleLocator(0.5))
+axins.xaxis.set_minor_locator(MultipleLocator(0.1))
+axins.tick_params(direction='in', length=6, width=2)
+axins.tick_params(which='minor',direction='in', length=4)
+
+#axins.contour(X, Y, Z)
+axins.set_xlim(0, 1.6)
+axins.set_ylim(0, 2000)
+mark_inset(ax, axins, loc1=2, loc2=3, fc='none')
+
+mark_inset(ax, axins, loc1=2, loc2=3, fc="none", ec="0.5")
 
 #plt.show()
-plt.savefig("density.pdf",bbox_inches='tight')
+plt.savefig("build\Dichte\densy.pdf",bbox_inches='tight')
 plt.close()

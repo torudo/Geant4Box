@@ -76,6 +76,16 @@ ax.text(0.05, 0.95, textstr, transform=ax.transAxes, fontsize=14,
 #plt.text(0.63, 0.21, "a"+str(0)+": {0:1.2e} +/- {1:1.2e} ({2:1.1f})".format(fitdata[0], np.sqrt(error_coeffizienten[0]**2), np.abs(100*(error_coeffizienten[0])/(fitdata[0]+fitdata[0]))), transform=fig.transFigure,fontsize='12')
 #plt.text(0.63, 0.18, "a"+str(1)+": {0:1.2e} +/- {1:1.2e} ({2:1.1f})".format(fitdata[1], np.sqrt(error_coeffizienten[1]**2), np.abs(100*(error_coeffizienten[1])/(fitdata[1]+fitdata[1]))), transform=fig.transFigure,fontsize='12')
 
+ax.yaxis.set_major_locator(MultipleLocator(500))
+ax.yaxis.set_minor_locator(MultipleLocator(100))
+
+ax.xaxis.set_major_locator(MultipleLocator(10))
+ax.xaxis.set_minor_locator(MultipleLocator(5))
+
+ax.grid(which='major', axis='both', linestyle='--',alpha=0.5)# lw = 0.5)
+ax.tick_params(direction='in', length=6, width=2)
+ax.tick_params(which='minor',direction='in', length=4)
+
 
 plt.xlabel(r"$Z$",fontsize='16')
 plt.ylabel(r"MPV",fontsize='16')
@@ -87,5 +97,5 @@ locs, labels = xticks()
 #ax.grid(axis="x")
 ax.grid(which='major', axis='both', linestyle='--',alpha=0.5)# lw = 0.5)
 #plt.show()
-plt.savefig("Z.pdf",bbox_inches='tight')
+plt.savefig(r"build\rightZ\atomic.pdf",bbox_inches='tight')
 plt.close()
