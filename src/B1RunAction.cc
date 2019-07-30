@@ -23,14 +23,16 @@ B1RunAction::B1RunAction() : G4UserRunAction()
 
   //---- Creating histograms ----//
   analysisManager->SetFirstHistoId(1);
-
+// 15000 for Al
+// 10 for gases of liwer density
+// otherwise 700
   // Energy depostion in detector (all particles)
-  analysisManager->CreateH1("Edep","total E deposition", 500, 0., 7000);
+  analysisManager->CreateH1("Edep","total E deposition", 500, 0., 15000);
   analysisManager->SetH1XAxisTitle(1, "energy deposit per cm (keV)");
   analysisManager->SetH1YAxisTitle(1, "nof entries");
 
   // Energy loss of the incident particle
-  analysisManager->CreateH1("Eloss","E loss", 500, 0., 7000);
+  analysisManager->CreateH1("Eloss","E loss", 500, 0., 15000);
   analysisManager->SetH1XAxisTitle(2, "energy loss per cm (keV)");
   analysisManager->SetH1YAxisTitle(2, "nof entries");
 
