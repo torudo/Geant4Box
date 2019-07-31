@@ -18,7 +18,7 @@ K = 0.307075 # constant K in MeV cm mol^-1
 z = 1 # charge in e
 Z = 29 # Atomic number Z
 #u =1.661e-24
-A = 75 #63.546#39.948#28.09 # Atomic mass in g mol-1
+A = 63.546#39.948#28.09 # Atomic mass in g mol-1
 Z_over_A = np.float(Z/A) # Silicon
 M = 105.65#938.27#139.6 # Mass of heavy particle in MeV
 m_e = 0.511 # Mass of electron in MeV
@@ -33,8 +33,8 @@ h_omega_p = 0.00003105 # Plasma energy in MeV
 
 T_kin_heavy = lambda p: sqrt( sqr(p) + sqr(M) ) - M
 
-T_cut = 1000 # Cut energy due to finite thickness of absorber in MeV
-I = 322*1e-6 # Ionisation energy in MeV
+T_cut = 0.05 # Cut energy due to finite thickness of absorber in MeV
+I = 322*1e-5 # Ionisation energy in MeV
 
 """ Constants of density correction """
 C = 4.44
@@ -68,7 +68,7 @@ E_MPV_limit = lambda p:  epsilon * ( log( ( 2 * m_e * epsilon ) / sqr(h_omega_p)
 
 """ Calculation of all formulas in momentum range ps """
 
-ps = np.logspace(0, 100, 10000) # MeV
+ps = np.logspace(1, 100, 10000) # MeV
 #ps = np.logspace(2, 6, 1000) # MeV
 
 dE_over_dX_pions = np.zeros(len(ps))
@@ -149,8 +149,8 @@ dE_pions_Tcut_450um = np.multiply(dE_over_dX_Tcut_pions, 0.045*1000)
 #windwos
 file = r'C:\Users\tobys\Documents\GitHub\Geant4Box\build\BB_muon_Cu\meanwerte_eloss_muon.txt' # takes first argument as filename
 
-energie, MPV, ERR = np.genfromtxt(file,
-	usecols=(0,1,2), comments="#",  unpack="True") # opens data ans extract values at lines
+energie, MPV, ERR, MEAN, STDV_M = np.genfromtxt(file,
+	usecols=(0,1,2,3,4), comments="#",  unpack="True") # opens data ans extract values at lines
 
 energie = np.array(energie)
 MPV = np.array(MPV)
@@ -166,15 +166,17 @@ fig.set_size_inches(8,6)
 my_font = 16
 plt.tick_params(axis='both', which='major', labelsize=my_font)
 
-#ax1.plot(ps_GeV, E_means, label='Bethe no correction', marker='.', color='Black', linestyle='', linewidth=2)
+#ax1.plot(ps_GeV*10, E_means*1e-5, label='Bethe no correction', marker='.', color='Black', linestyle='', linewidth=2)
 #ax1.plot(ps_GeV, E_mean_density_corr, label='Bethe density correction', marker='', color='Red', linestyle='--', linewidth=2)
 
-ax1.plot(ps_GeV*10, E_MPVs_Landau*1e-5, label='MPV Landau', marker='', color='Blue', linestyle='-', linewidth=2)
+ax1.plot(ps_GeV*9, E_MPVs_Landau*1e-5+0.1, label='MPV Landau', marker='', color='Blue', linestyle='-', linewidth=2)
 #ax1.plot(ps_GeV, E_mean_density_corr_Tcut, label='Bethe Tcut = 60 keV', marker='', color='DarkGreen', linestyle=':', linewidth=2)
 ###ax1.plot(ps_GeV, E_MPVs_Landau_limit, label='MPV Landau Limit', marker='', color='Gray', linestyle='-', linewidth=2)
 
+plt.errorbar(energie*1e-2, MEAN*1e-4, yerr=STDV_M*1e-4, marker= 'x', markersize=4,
+linewidth=0, elinewidth=1, capsize=2, label='Mean Cu', color='black', ecolor='gray')
 
-plt.errorbar(energie*1e-2, MPV*1e-4, yerr=ERR*1e-5, marker= 'x', markersize=10,
+plt.errorbar(energie*1e-2, MPV*1e-4, yerr=ERR*1e-4, marker= 'x', markersize=10,
 linewidth=0, elinewidth=1, capsize=2,
 label='Cu', color='red', ecolor='gray') # Messwerte
 
@@ -187,16 +189,17 @@ ps_min = ps_GeV[np.where(E_MPVs_Landau[:] == np.min(E_MPVs_Landau))]
 plt.grid(True, which="both", ls="-", color='0.65')
 #plt.axvline(120000, label = '120 GeV pions', color='Gray', linewidth=5)
 ax1.set_xscale('log')
-plt.ylabel('Energy loss in 0.1 cm Cu in MeV/g/cm$^2$', fontsize = my_font)
-plt.xlabel('Momentum p / MeV', fontsize = my_font)
+plt.ylabel('MPV in 0.1 cm Cu in MeV/g/cm$^2$', fontsize = my_font)
+plt.xlabel(r'$\beta \gamma$', fontsize = my_font)
 
 plt.legend(loc='upper right')
 
+#plt.xlim(7e-2,3e3)
+plt.ylim(1, 1.5)
+
 #plt.ylim(0,7.6)
-plt.xlim(7e-2,3e3)
 #plt.ylim(100000, 140000)
 #plt.ylim(100, 140)
-plt.ylim(1, 1.4)
 #plt.ylim(0, 25)
 
 #ax2 = ax1.twinx()
