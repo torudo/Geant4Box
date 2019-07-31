@@ -61,8 +61,8 @@ for dateien in dirs:
         schreibeInDatei(filename, energie, MPV, ERR)
         func.Draw("SAME")
         c1.Update()
-        c1.Print(path+"Eloss_"+dateien[:-5]+".pdf")
-        myfile.Close()
+c1.Print(path+"Eloss_"+dateien[:-5]+".pdf")
+myfile.Close()
 
 
 ################################################################################
